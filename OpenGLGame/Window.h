@@ -26,7 +26,7 @@ public:
 	// we introduced a bool to show whether creating the window
 	// was successful or not
 	bool success{};
-	Window(int width, int height) {
+	Window(int width, int height) { // Start (Awake)
 		glfwSetErrorCallback(error_callback);
 
 		// Initialize GLFW
