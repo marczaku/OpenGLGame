@@ -18,11 +18,9 @@ class Window
 	static void error_callback(int error, const char* msg) {
 		cerr << " [" << error << "] " << msg << endl;
 	}
+	GLFWwindow* window;
 
 public:
-	// public GLFWwindow* as a hacky workaround so that
-	// our main() can still use it for rendering and input
-	GLFWwindow* window;
 	// we introduced a bool to show whether creating the window
 	// was successful or not
 	bool success{};
@@ -69,6 +67,21 @@ public:
 
 		// Initialization ends here
 		success = true; // We set success to be true
+	}
+
+	bool shouldClose() {
+		return glfwWindowShouldClose(this->window);
+	}
+
+	void present() {
+		glfwSwapBuffers(window);
+	}
+
+	void processInput()
+	{
+		glfwPollEvents();
+		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, true);
 	}
 };
 
