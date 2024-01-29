@@ -56,5 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="vertexShader.glsl" />
+    <None Include="orangeFragmentShader.glsl" />
   </ItemGroup>
 </Project>
