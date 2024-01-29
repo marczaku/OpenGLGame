@@ -1,10 +1,20 @@
 #pragma once
+
+#include "glad/glad.h"
+#include "Shader.h"
+
 class Material
 {
-	// make sure your OpenGLGame.cpp and Window.h are up to date
-	// add classes material mesh and triangle
-	// commit and push
-	// break until 9:55
-
+	unsigned int shaderProgram;
+public:
+	Material(Shader& vertexShader, Shader& fragmentShader) {
+		shaderProgram = glCreateProgram();
+		glAttachShader(shaderProgram, vertexShader.shaderId);
+		glAttachShader(shaderProgram, fragmentShader.shaderId);
+		glLinkProgram(shaderProgram);
+	}
+	void use() {
+		glUseProgram(shaderProgram);
+	}
 };
 
