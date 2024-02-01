@@ -18,15 +18,23 @@ public:
 
     void render() {
         material->use();
-        
+
         int tintLocation = glGetUniformLocation(
             material->shaderProgram, "tintColor");
         glUniform4f(tintLocation, red, 0, 0, 1);
-        
+
         int offsetLocation = glGetUniformLocation(
             material->shaderProgram, "horizontalOffset");
         glUniform1f(offsetLocation, horizontalOffset);
-        
+
+        int diffuseLocation = glGetUniformLocation(
+            material->shaderProgram, "diffuseTexture");
+        glUniform1i(diffuseLocation, 0);
+
+        int blendLocation = glGetUniformLocation(
+            material->shaderProgram, "blendTexture");
+        glUniform1i(blendLocation, 1);
+
         mesh->render();
     }
 };
