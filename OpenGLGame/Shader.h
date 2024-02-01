@@ -52,14 +52,14 @@ class Shader
     }
 
 public:
-	unsigned int shaderId;
-	Shader(const char* shaderPath, int shaderType) { // when constructed: load shader on GPU
+    unsigned int shaderId;
+    Shader(const char* shaderPath, int shaderType) { // when constructed: load shader on GPU
         shaderId = compileShaderFromFile(shaderPath, shaderType);
-	}
-	Shader(const Shader&) = delete; // avoid it being cloned // Copy Constructor
+    }
+    Shader(const Shader&) = delete; // avoid it being cloned // Copy Constructor
 
-	~Shader() { // when destructed: delete the shader from GPU
-		glDeleteShader(shaderId);
-	}
+    ~Shader() { // when destructed: delete the shader from GPU
+        glDeleteShader(shaderId);
+    }
 };
 

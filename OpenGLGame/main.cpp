@@ -13,18 +13,14 @@ using namespace std;
 
 void processInput(GLFWwindow*);
 
-
-void foo(int* var) {
-    *var = 5;
-}
-
 int main() {
 
     Window window{ 800,600 };
 
     int width, height, nrChannels;
 
-    unsigned char* data = stbi_load("container.jpg", 
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* data = stbi_load("container.jpg",
         &width, &height, &nrChannels, 0);
     
     unsigned int textureId;
@@ -41,7 +37,7 @@ int main() {
            Vertex{Vector3{-0.5f,  0.5f, 0.0f}},
            Vertex{Vector3{-1.0f, -0.5f, 0.0f}},
            Vertex{Vector3{-0.5f,  0.5f, 0.0f}},
-           Vertex{Vector3{-1.0f, 0.5f, 0.0f}}    
+           Vertex{Vector3{-1.0f, 0.5f, 0.0f}}
     };
 
 
@@ -60,12 +56,14 @@ int main() {
         Vertex{Vector3{ 0.5f,  0.5f, 0.0f},  Color::red,     Vector2{ 1.0f, 1.0f }},   // top right
         Vertex{Vector3{ 0.5f, -0.5f, 0.0f},  Color::green,   Vector2{ 1.0f, 0.0f }},   // bottom right
         Vertex{Vector3{-0.5f, -0.5f, 0.0f},  Color::blue,    Vector2{ 0.0f, 0.0f }},   // bottom left
-        Vertex{Vector3{-0.5f,  0.5f, 0.0f},  Color::yellow,  Vector2{ 0.0f, 1.0f }}    // top left 
+        Vertex{Vector3{-0.5f,  0.5f, 0.0f},  Color::yellow,  Vector2{ 0.0f, 1.0f }},    // top left
+        Vertex{Vector3{ 0.5f,  0.5f, 0.0f},  Color::red,     Vector2{ 1.0f, 1.0f }},   // top right
+        Vertex{Vector3{-0.5f, -0.5f, 0.0f},  Color::blue,    Vector2{ 0.0f, 0.0f }},   // bottom left
     };
 
     Mesh mesh3{ vertices3, size(vertices3) };
 
-    Shader vertexShader{ "upsideDownVertexShader.glsl", GL_VERTEX_SHADER };
+    Shader vertexShader{ "vertexShader.glsl", GL_VERTEX_SHADER };
 
     Shader orangeShader{
         "orangeFragmentShader.glsl", GL_FRAGMENT_SHADER
@@ -102,6 +100,9 @@ int main() {
 
         a.render();
         b.render();
+        
+        c.horizontalOffset = cos(glfwGetTime());
+        
         c.render();
 
         window.present();
