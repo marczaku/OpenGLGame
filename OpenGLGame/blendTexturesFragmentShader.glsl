@@ -16,6 +16,8 @@ uniform sampler2D blendTexture;
 in vec4 vertexColor;
 in vec2 texCoord;
 
+uniform ?? ??
+
 void main()
 {
     //pixelColor = vertexColor * texture(diffuseTexture, texCoord);

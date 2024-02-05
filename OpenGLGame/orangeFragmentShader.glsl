@@ -4,5 +4,5 @@ uniform vec4 tintColor;
 in vec4 vertexColor;
 void main()
 {
-    pixelColor = vertexColor;
+    pixelColor = tintColor;
 }
